@@ -15,28 +15,31 @@ const Navbar = () => {
   ];
 
   return (
-    <header style={{ backgroundColor: 'var(--white)', boxShadow: 'var(--shadow-sm)', position: 'sticky', top: 0, zIndex: 50 }}>
-      <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '4rem' }}>
-        <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 'bold', fontSize: '1.25rem', color: 'var(--primary)' }}>
-          <Bike size={28} />
+    <header style={{ backgroundColor: 'var(--light)', boxShadow: 'var(--shadow-sm)', position: 'sticky', top: 0, zIndex: 50, borderBottom: '1px solid rgba(15, 61, 54, 0.1)' }}>
+      <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '5rem' }}>
+        <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', fontWeight: 800, fontSize: '1.5rem', color: 'var(--primary)' }}>
+          <Bike size={32} color="var(--accent)" />
           WildBikeTours
         </Link>
 
         {/* Desktop Nav */}
         <nav style={{ display: 'none' }} className="md-flex gap-4">
-          <ul style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
+          <ul style={{ display: 'flex', gap: '2.5rem', alignItems: 'center' }}>
             {navLinks.map((link) => (
               <li key={link.name}>
                 <Link 
                   to={link.path} 
                   style={{ 
-                    fontWeight: 500, 
-                    color: location.pathname === link.path ? 'var(--primary)' : 'var(--dark-light)',
+                    fontWeight: 600, 
+                    color: location.pathname === link.path ? 'var(--secondary)' : 'var(--primary)',
+                    textTransform: 'uppercase',
+                    letterSpacing: '1px',
+                    fontSize: '0.875rem',
                     transition: 'color 0.2s'
                   }}
-                  onMouseEnter={(e) => e.target.style.color = 'var(--primary)'}
+                  onMouseEnter={(e) => e.target.style.color = 'var(--secondary)'}
                   onMouseLeave={(e) => {
-                    if(location.pathname !== link.path) e.target.style.color = 'var(--dark-light)';
+                    if(location.pathname !== link.path) e.target.style.color = 'var(--primary)';
                   }}
                 >
                   {link.name}
@@ -44,7 +47,7 @@ const Navbar = () => {
               </li>
             ))}
             <li>
-              <Link to="/booking" className="btn btn-primary" style={{ padding: '0.5rem 1rem' }}>Book Now</Link>
+              <Link to="/booking" className="btn btn-secondary" style={{ padding: '0.75rem 1.5rem', textTransform: 'uppercase', letterSpacing: '1px', fontSize: '0.875rem' }}>Book Now</Link>
             </li>
           </ul>
         </nav>
@@ -52,16 +55,16 @@ const Navbar = () => {
         {/* Mobile Menu Toggle */}
         <button 
           onClick={toggleMenu}
-          style={{ display: 'block', background: 'none', border: 'none', cursor: 'pointer', color: 'var(--dark)' }}
+          style={{ display: 'block', background: 'none', border: 'none', cursor: 'pointer', color: 'var(--primary)' }}
           className="md-none"
         >
-          {isOpen ? <X size={28} /> : <Menu size={28} />}
+          {isOpen ? <X size={32} /> : <Menu size={32} />}
         </button>
       </div>
 
       {/* Mobile Nav */}
       {isOpen && (
-        <nav style={{ padding: '1rem', backgroundColor: 'var(--white)', borderTop: '1px solid var(--light)' }} className="md-none">
+        <nav style={{ padding: '1rem', backgroundColor: 'var(--light)', borderTop: '1px solid rgba(15, 61, 54, 0.1)' }} className="md-none">
           <ul style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             {navLinks.map((link) => (
               <li key={link.name}>
@@ -70,17 +73,19 @@ const Navbar = () => {
                   onClick={toggleMenu}
                   style={{ 
                     display: 'block',
-                    padding: '0.5rem 0',
-                    fontWeight: 500, 
-                    color: location.pathname === link.path ? 'var(--primary)' : 'var(--dark-light)'
+                    padding: '0.75rem 0',
+                    fontWeight: 600, 
+                    textTransform: 'uppercase',
+                    letterSpacing: '1px',
+                    color: location.pathname === link.path ? 'var(--secondary)' : 'var(--primary)'
                   }}
                 >
                   {link.name}
                 </Link>
               </li>
             ))}
-            <li style={{ paddingTop: '0.5rem' }}>
-              <Link to="/booking" onClick={toggleMenu} className="btn btn-primary" style={{ width: '100%' }}>Book Now</Link>
+            <li style={{ paddingTop: '1rem' }}>
+              <Link to="/booking" onClick={toggleMenu} className="btn btn-secondary" style={{ width: '100%', textTransform: 'uppercase', letterSpacing: '1px' }}>Book Now</Link>
             </li>
           </ul>
         </nav>
